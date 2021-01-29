@@ -21,7 +21,8 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: false }));
 
 // api routes
-// app.use("/api/musicalbum", require("./components/music-album/musicAlbumRoute"));
+app.use("/api/musicalbum", require("./components/music-album/musicAlbumRoute"));
+app.use("/api/musician", require("./components/musician/musicianRoute"));
 
 app.all("/api/*", (req, res, next) => {
   next(new AppError(`Cannot find ${req.originalUrl} on the server`, 404));
