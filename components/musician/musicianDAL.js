@@ -22,7 +22,9 @@ async function createMusician(data) {
 
 async function getSingleMusicianByName(data) {
   try {
-    let result = await musicianModel.findOne({ name: data.name }).lean();
+    let result = await musicianModel
+      .findOne({ name: { $regex: data.name, $options: "i" } })
+      .lean();
     return result;
   } catch (err) {
     throw err;
@@ -47,7 +49,22 @@ async function getMusicAlbumByMusician(data) {
       .populate({
         model: "musicAlbums",
         path: "sungOrPlayedAlbums",
-        sort: { price: -1 },
+        options: { sort: "price" },
+      })
+      .lean();
+    return result;
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function getAllMusicians(data) {
+  try {
+    let result = await musicianModel
+      .find()
+      .populate({
+        model: "musicAlbums",
+        path: "sungOrPlayedAlbums",
       })
       .lean();
     return result;
@@ -71,6 +88,7 @@ async function updateMusician(data) {
 module.exports = {
   createMusician: createMusician,
   getSingleMusicianByName: getSingleMusicianByName,
+  getAllMusicians: getAllMusicians,
   getMusicAlbumByMusician: getMusicAlbumByMusician,
   getMusicianById: getMusicianById,
   updateMusician: updateMusician,

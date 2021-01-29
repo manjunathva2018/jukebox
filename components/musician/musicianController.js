@@ -31,6 +31,9 @@ module.exports.getMusicAlbumsByMusicianName = async function (req, res, next) {
       new AppError("The musician name query parameter is not present!", 403)
     );
   try {
+    let musicianExists = await musicianDAL.getSingleMusicianByName(q);
+    if (!musicianExists)
+      return next(new AppError("The Musician does not exsits!", 404));
     let albumData = await musicianDAL.getMusicAlbumByMusician(q);
     return res.status(200).json({
       status: "SUCCESS",
@@ -39,6 +42,20 @@ module.exports.getMusicAlbumsByMusicianName = async function (req, res, next) {
     });
   } catch (err) {
     console.log(colors.red, `getMusicAlbumsByMusicianName err ${err}`);
+    return next(new AppError(err, 400));
+  }
+};
+
+module.exports.getAll = async function (req, res, next) {
+  try {
+    let albumData = await musicianDAL.getAllMusicians({});
+    return res.status(200).json({
+      status: "SUCCESS",
+      message: null,
+      data: albumData,
+    });
+  } catch (err) {
+    console.log(colors.red, `getAll err ${err}`);
     return next(new AppError(err, 400));
   }
 };

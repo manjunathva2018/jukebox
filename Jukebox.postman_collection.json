@@ -1,0 +1,296 @@
+{
+	"info": {
+		"_postman_id": "974d3bb8-a5ab-4453-8b00-7c2b17fe0962",
+		"name": "Jukebox",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Music Albums",
+			"item": [
+				{
+					"name": "Create a  music album",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"albumName\":\"Don 2\",\r\n    \"dateOfRelease\":\"16 November 2011\",\r\n    \"genre\":[\"Bollywood OGT\",\"Action\"],\r\n    \"price\":190,\r\n    \"description\":\"1. Aa Raha Hoon Palat Ke - 00m35s\\n2. Zaraa Dil Ko Thaam Lo - 05m08s\\n3. Hai Ye Maya - 04m42s\\n4. Dushman Mera - 03m43s\\n5. The King Is Back - Theme - 03m56s\\n6. Mujhko Pehchaanlo - 03m23s\\n7. Hai Ye Maya - Remix - 04m41s\\n8. Mujhko Pehchaanlo - Remix - 04m51s\\n9. The Don Waltz - 03m28s\\n\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/api/musicalbum",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"api",
+								"musicalbum"
+							]
+						},
+						"description": "Create a  music album POST API"
+					},
+					"response": []
+				},
+				{
+					"name": "Update a  music album",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"albumName\":\"Don 2\",\r\n    \"dateOfRelease\":\"16 November 2011\",\r\n    \"genre\":[\"Bollywood OGT\",\"Action\"],\r\n    \"price\":190,\r\n    \"description\":\"1. Aa Raha Hoon Palat Ke - 00m35s\\n2. Zaraa Dil Ko Thaam Lo - 05m08s\\n3. Hai Ye Maya - 04m42s\\n4. Dushman Mera - 03m43s\\n5. The King Is Back - Theme - 03m56s\\n6. Mujhko Pehchaanlo - 03m23s\\n7. Hai Ye Maya - Remix - 04m41s\\n8. Mujhko Pehchaanlo - Remix - 04m51s\\n9. The Don Waltz - 03m28s\\n\",\r\n    \"sungOrPlayedByMusicians\":[\"601446ebc56b7f14106ae5fc\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/api/musicalbum/:musicAlbumId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"api",
+								"musicalbum",
+								":musicAlbumId"
+							],
+							"variable": [
+								{
+									"key": "musicAlbumId",
+									"value": "6014464ec56b7f14106ae5fb"
+								}
+							]
+						},
+						"description": "update music album PUT API"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all  music album",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"albumName\":\"\",\r\n    \"dateOfRelease\":\"\",\r\n    \"genre\":[],\r\n    \"price\":2,\r\n    \"description\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/api/musicalbum?sortDateOfRelease=desc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"api",
+								"musicalbum"
+							],
+							"query": [
+								{
+									"key": "sortDateOfRelease",
+									"value": "desc"
+								}
+							]
+						},
+						"description": "List of all music album records GET API"
+					},
+					"response": []
+				}
+			],
+			"description": "Contains Music Albums APIS",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Musicians",
+			"item": [
+				{
+					"name": "Create a musician",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Zakir Hussain\",\r\n    \"musicianType\":\"Instrumentalist\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/api/musician",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"api",
+								"musician"
+							]
+						},
+						"description": "Create a musician POST API"
+					},
+					"response": []
+				},
+				{
+					"name": "Update a musician",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"A. R. Rahman\",\r\n            \"musicianType\": \"Vocalist\",\r\n    \"sungOrPlayedAlbums\":[\"6014419aea6778333008eee7\",\"601442d5ea6778333008eee8\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/api/musician/:musicianId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"api",
+								"musician",
+								":musicianId"
+							],
+							"variable": [
+								{
+									"key": "musicianId",
+									"value": "601449889fec8436ac007d46"
+								}
+							]
+						},
+						"description": "Update musician PUT API"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all musicians",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2000/api/musician",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"api",
+								"musician"
+							]
+						},
+						"description": "Get all musicians API"
+					},
+					"response": []
+				}
+			],
+			"description": "This contains Musicians APIs"
+		},
+		{
+			"name": "Search APIs",
+			"item": [
+				{
+					"name": "Retrieve the list of Music albums for a specified musician",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2000/api/musician/search?musicianname=A. R.",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"api",
+								"musician",
+								"search"
+							],
+							"query": [
+								{
+									"key": "musicianname",
+									"value": "A. R."
+								}
+							]
+						},
+						"description": "Get API"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve the list of musicians for a specified music album",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2000/api/musicalbum/search?albumname=Don 2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"api",
+								"musicalbum",
+								"search"
+							],
+							"query": [
+								{
+									"key": "albumname",
+									"value": "Don 2"
+								}
+							]
+						},
+						"description": "Get API"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

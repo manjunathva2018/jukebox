@@ -22,7 +22,7 @@ async function createMusicAlbum(data) {
 async function getSingleAlbumByName(data) {
   try {
     let result = await musicAlbumModel
-      .findOne({ albumName: data.albumName })
+      .findOne({ albumName: { $regex: data.albumName, $options: "i" } })
       .lean();
     return result;
   } catch (err) {
@@ -60,11 +60,13 @@ async function getAllMusicAlbums(data) {
 async function getMusiciansByAlbum(data) {
   try {
     let result = await musicAlbumModel
-      .findOne({ albumName: { $regex: data.albumName, $options: "i" } })
+      .findOne({
+        albumName: { $regex: data.albumName, $options: "i" },
+      })
       .populate({
         model: "musicians",
         path: "sungOrPlayedByMusicians",
-        sort: { name: -1 },
+        options: { sort: "name" },
       })
       .lean();
     return result;

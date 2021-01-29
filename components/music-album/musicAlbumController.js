@@ -36,11 +36,11 @@ module.exports.getAllMethod = async function (req, res, next) {
     // code level date sorting (date of release)
     if (q === "asc" || q === "ASC") {
       filteredData = albumData.sort((a, b) => {
-        return new Date(b.dateOfRelease) - new Date(a.dateOfRelease);
+        return new Date(a.dateOfRelease) - new Date(b.dateOfRelease);
       });
     } else if (q === "desc" || q === "DESC") {
       filteredData = albumData.sort((a, b) => {
-        return new Date(a.dateOfRelease) - new Date(b.dateOfRelease);
+        return new Date(b.dateOfRelease) - new Date(a.dateOfRelease);
       });
     }
 
@@ -61,8 +61,12 @@ module.exports.getMusiciansByMusicAlbum = async function (req, res, next) {
     return next(
       new AppError("The albumname query parameter is not present!", 403)
     );
+
   try {
-    let musicianData = await musicAlbumDAL.getMusiciansByMusicAlbum(q);
+    let albumExists = await musicAlbumDAL.getSingleAlbumByName(q);
+    if (!albumExists)
+      return next(new AppError("The Album does not exsits!", 404));
+    let musicianData = await musicAlbumDAL.getMusiciansByAlbum(q);
     return res.status(200).json({
       status: "SUCCESS",
       message: null,
