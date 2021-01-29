@@ -24,6 +24,25 @@ module.exports.createMethod = async function (req, res, next) {
   }
 };
 
+module.exports.getMusicAlbumsByMusicianName = async function (req, res, next) {
+  const q = { name: req.query.musicianname };
+  if (q.name == null || q.name == undefined)
+    return next(
+      new AppError("The musician name query parameter is not present!", 403)
+    );
+  try {
+    let albumData = await musicianDAL.getMusicAlbumByMusician(q);
+    return res.status(200).json({
+      status: "SUCCESS",
+      message: null,
+      data: albumData.sungOrPlayedAlbums,
+    });
+  } catch (err) {
+    console.log(colors.red, `getMusicAlbumsByMusicianName err ${err}`);
+    return next(new AppError(err, 400));
+  }
+};
+
 module.exports.updateMethod = async function (req, res, next) {
   const data = req.body;
   try {

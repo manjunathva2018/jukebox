@@ -24,6 +24,56 @@ module.exports.createMethod = async function (req, res, next) {
   }
 };
 
+// 3 API to retrieve the list of Music albums sorted by Date of release in ascending order (i.e
+// Oldest first)
+module.exports.getAllMethod = async function (req, res, next) {
+  const q = req.query.sortDateOfRelease;
+  try {
+    let albumData = await musicAlbumDAL.getAllMusicAlbums({});
+
+    let filteredData = albumData;
+
+    // code level date sorting (date of release)
+    if (q === "asc" || q === "ASC") {
+      filteredData = albumData.sort((a, b) => {
+        return new Date(b.dateOfRelease) - new Date(a.dateOfRelease);
+      });
+    } else if (q === "desc" || q === "DESC") {
+      filteredData = albumData.sort((a, b) => {
+        return new Date(a.dateOfRelease) - new Date(b.dateOfRelease);
+      });
+    }
+
+    return res
+      .status(200)
+      .json({ status: "SUCCESS", message: null, data: filteredData });
+  } catch (err) {
+    console.log(colors.red, `getAllMethod err ${err}`);
+    return next(new AppError(err, 400));
+  }
+};
+
+// 5. API to retrieve the list of musicians for a specified music album sorted by musician's
+// Name in ascending order.
+module.exports.getMusiciansByMusicAlbum = async function (req, res, next) {
+  const q = { albumName: req.query.albumname };
+  if (q.albumName == null || q.albumName == undefined)
+    return next(
+      new AppError("The albumname query parameter is not present!", 403)
+    );
+  try {
+    let musicianData = await musicAlbumDAL.getMusiciansByMusicAlbum(q);
+    return res.status(200).json({
+      status: "SUCCESS",
+      message: null,
+      data: musicianData.sungOrPlayedByMusicians,
+    });
+  } catch (err) {
+    console.log(colors.red, `getMusiciansByMusicAlbum err ${err}`);
+    return next(new AppError(err, 400));
+  }
+};
+
 module.exports.updateMethod = async function (req, res, next) {
   const data = req.body;
   try {

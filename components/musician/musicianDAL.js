@@ -38,6 +38,24 @@ async function getMusicianById(data) {
   }
 }
 
+// 4. API to retrieve the list of Music albums for a specified musician sorted by Price in
+// ascending order (i.e Lowest first)
+async function getMusicAlbumByMusician(data) {
+  try {
+    let result = await musicianModel
+      .findOne({ name: { $regex: data.name, $options: "i" } })
+      .populate({
+        model: "musicAlbums",
+        path: "sungOrPlayedAlbums",
+        sort: { price: -1 },
+      })
+      .lean();
+    return result;
+  } catch (err) {
+    throw err;
+  }
+}
+
 async function updateMusician(data) {
   try {
     let result = await musicianModel.findOneAndUpdate({ _id: data._id }, data, {
@@ -53,6 +71,7 @@ async function updateMusician(data) {
 module.exports = {
   createMusician: createMusician,
   getSingleMusicianByName: getSingleMusicianByName,
+  getMusicAlbumByMusician: getMusicAlbumByMusician,
   getMusicianById: getMusicianById,
   updateMusician: updateMusician,
 };

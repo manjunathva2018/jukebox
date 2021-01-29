@@ -3,7 +3,7 @@ const router = express.Router();
 const mController = require("./musicianController");
 
 router.route("/").post(mController.createMethod);
-//   .get(mController.getAllMethod);
+router.route("/search").get(mController.getMusicAlbumsByMusicianName);
 
 router.route("/:musicianId").put(mController.updateMethod);
 
