@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node index",
     "dev": "nodemon index",
+    "db_init": "./node_modules/.bin/migrate up initial_data",
+    "db_migrate": "./node_modules/.bin/migrate up",
+    "db_list": "./node_modules/.bin/migrate list",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -18,6 +21,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "joi": "^17.3.0",
+    "migrate-mongoose": "^4.0.0",
     "mongoose": "^5.11.13",
     "morgan": "^1.10.0"
   },

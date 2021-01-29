@@ -19,6 +19,16 @@ The project folder is based on component architecture.
 
 Step 2 : run `npm start` at the root folder
 
+---
+
+### To import initial data to the database
+
+Step 1: set MIGRATE_dbConnectionUri='Mongo DB Connection URL' variable inside .env file
+
+Step 2 : run `npm run-script db_init` to import the initial data / existing data into the database
+
+Step 3 : select `1611946125929-initial_data.js` by pressing the spacebar key followed by enter key.
+
 ## import Jukebox.postman_collection.json file into postman application if required or find the APIs documentation below-
 
 ## API end points
