@@ -2,7 +2,7 @@
 
 ### Nodejs version 13+ and mongodb above version 4.6 is required to run the project
 
-## run `npm install` at the root folder
+## run `npm install --only=prod` at the root folder
 
 ### Steps for running the project
 
