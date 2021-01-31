@@ -2,6 +2,8 @@
 
 ### Nodejs version 13+ and mongodb above version 4.6 is required to run the project
 
+## run `npm install` at the root folder
+
 ### Steps for running the project
 
 Step 1 : Add the following environment variables in root folder inside .env file
@@ -27,7 +29,7 @@ Step 1: set MIGRATE_dbConnectionUri='Mongo DB Connection URL' variable inside .e
 
 Step 2 : run `npm run-script db_init` to import the initial data / existing data into the database
 
-Step 3 : select `1611946125929-initial_data.js` by pressing the spacebar key followed by enter key.
+## Step 3 : select `1611946125929-initial_data.js` by pressing the spacebar key followed by enter key.
 
 ## import Jukebox.postman_collection.json file into postman application if required or find the APIs documentation below-
 
